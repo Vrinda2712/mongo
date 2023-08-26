@@ -1,0 +1,744 @@
+test> db.Employee.insertMany([
+,
+        dept: { deptno: 17, dname: "Purchase", dloc: "Pune" },
+        Desg: "Manager",
+        mgr: { name: "Satish", num: 111 },
+        project: [
+            { name: "Project-1", Hrs: 4 }
+        ]
+    },
+    {
+        emono: 555,
+        ename: "Tina Mehta",
+        sal: 25000.00,
+        dept: { deptno: 15, dname: "Sales", dloc: "Delhi" },
+        Desg: "CLERK",
+        mgr: { name: "Rajan Sharma", num: 222 },
+        project: [
+            { name: "project-4", Hrs: 2 }
+        ]
+    }
+]);
+...     {
+...         emono: 111,
+...         ename: "Deepali Vaidya",
+...         sal: 40000.00,
+...         dept: { deptno: 12, dname: "Hr", dloc: "Mumbai" },
+...         Desg: "Analyst",
+...         mgr: { name: "Satish", num: 111 },
+...         project: [
+...             { name: "Project-1", Hrs: 4 },
+...             { name: "project-2", Hrs: 4 }
+...         ]
+...     },
+...     {
+...         emono: 222,
+...         ename: "Rajan Sharma",
+...         sal: 55000.00,
+...         dept: { deptno: 15, dname: "Sales", dloc: "Delhi" },
+...         Desg: "CLERK",
+...         mgr: { name: "Deepali Vaidya", num: 111 },
+...         project: [
+...             { name: "Project-1", Hrs: 5 }
+...         ]
+...     },
+...     {
+...         emono: 333,
+...         ename: "Revati Deshpande",
+...         sal: 32000.00,
+...         dept: { deptno: 12, dname: "Hr", dloc: "Mumbai" },
+...         Desg: "CLERK",
+...         mgr: { name: "Deepali Vaidya", num: 111 },
+...         project: [
+...             { name: "project-3", Hrs: 2 }
+...         ]
+...     },
+...     {
+...         emono: 444,
+...         ename: "Pradeep Kumar",
+...         sal: 60000.00,
+...         dept: { deptno: 17, dname: "Purchase", dloc: "Pune" },
+...         Desg: "Manager",
+...         mgr: { name: "Satish", num: 111 },
+...         project: [
+...             { name: "Project-1", Hrs: 4 }
+...         ]
+...     },
+...     {
+...         emono: 555,
+...         ename: "Tina Mehta",
+...         sal: 25000.00,
+...         dept: { deptno: 15, dname: "Sales", dloc: "Delhi" },
+...         Desg: "CLERK",
+...         mgr: { name: "Rajan Sharma", num: 222 },
+...         project: [
+...             { name: "project-4", Hrs: 2 }
+...         ]
+...     }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64e7a97c13a1b12a31d71395"),
+    '1': ObjectId("64e7a97c13a1b12a31d71396"),
+    '2': ObjectId("64e7a97c13a1b12a31d71397"),
+    '3': ObjectId("64e7a97c13a1b12a31d71398"),
+    '4': ObjectId("64e7a97c13a1b12a31d71399")
+  }
+}
+test> db.Employee.find()
+[
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71395"),
+    emono: 111,
+    ename: 'Deepali Vaidya',
+    sal: 40000,
+    dept: { deptno: 12, dname: 'Hr', dloc: 'Mumbai' },
+    Desg: 'Analyst',
+    mgr: { name: 'Satish', num: 111 },
+    project: [ { name: 'Project-1', Hrs: 4 }, { name: 'project-2', Hrs: 4 } ]
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71396"),
+    emono: 222,
+    ename: 'Rajan Sharma',
+    sal: 55000,
+    dept: { deptno: 15, dname: 'Sales', dloc: 'Delhi' },
+    Desg: 'CLERK',
+    mgr: { name: 'Deepali Vaidya', num: 111 },
+    project: [ { name: 'Project-1', Hrs: 5 } ]
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71397"),
+    emono: 333,
+    ename: 'Revati Deshpande',
+    sal: 32000,
+dept: { deptno: 12, dname: 'Hr', dloc: 'Mumbai' },
+    Desg: 'CLERK',
+    mgr: { name: 'Deepali Vaidya', num: 111 },
+    project: [ { name: 'project-3', Hrs: 2 } ]
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71398"),
+    emono: 444,
+    ename: 'Pradeep Kumar',
+    sal: 60000,
+    dept: { deptno: 17, dname: 'Purchase', dloc: 'Pune' },
+    Desg: 'Manager',
+    mgr: { name: 'Satish', num: 111 },
+    project: [ { name: 'Project-1', Hrs: 4 } ]
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71399"),
+    emono: 555,
+    ename: 'Tina Mehta',
+    sal: 25000,
+    dept: { deptno: 15, dname: 'Sales', dloc: 'Delhi' },
+    Desg: 'CLERK',
+    mgr: { name: 'Rajan Sharma', num: 222 },
+    project: [ { name: 'project-4', Hrs: 2 } ]
+  }
+]
+test> // 1. Update designation for employees with designation "CLERK" to "Administrative Officer"
+
+test> db.Employee.updateMany(
+...     { Desg: "CLERK" },
+...     { $set: { Desg: "Administrative Officer" } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+test> 
+
+test> // 2. Change the number of hours for project-1 to 5 for all employees with designation "Analyst"
+test> db.Employee.updateMany(
+...     { Desg: "Analyst", "project.name": "Project-1" },
+...     { $set: { "project.$.Hrs": 5 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> 
+
+test> // 3. Add 2 projects "project-3" and "project-4" for employees whose name starts with "Deep" with 2 hrs
+
+test> db.Employee.updateMany(
+...     { ename: /^Deep/ },
+...     {
+...         $push: {
+...             project: { $each: [{ name: "project-3", Hrs: 2 }, { name: "project-4", Hrs: 2 }] }
+...         }
+...     }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> // 4. Add bonus based on salary conditions
+
+test> db.Employee.updateMany(
+...     { sal: { $gt: 50000 } },
+...     { $set: { bonus: 2000 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+test> 
+
+test> db.Employee.updateMany(
+...     { sal: { $lt: 50000, $gt: 30000 } },
+...     { $set: { bonus: 1500 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+test> 
+
+test> db.Employee.updateMany(
+...     { $or: [{ sal: { $lt: 30000 } }, { sal: { $gt: 50000 } }] },
+...     { $set: { bonus: 1000 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+test> 
+
+test> // 5. Change manager name and number
+
+test> db.Employee.updateMany(
+...     { "mgr.name": "Satish" },
+...     { $set: { "mgr.name": "Tushar", "mgr.num": 3333 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+test> // 6. Increase salary of all employees from "purchase department" by 15000
+test> db.Employee.updateMany(
+...     { "dept.dname": "Hr", "dept.dloc": "Mumbai" },
+...     { $inc: { sal: 15000 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+test> 
+
+test> // 7. Decrease "Hrs" by 2 for all employees working on "project-2"
+
+test> db.Employee.updateMany(
+...     { "project.name": "project-2" },
+...     { $inc: { "project.$.Hrs": -2 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> 
+
+test> // 8. Delete "project-2" from all employee documents if they are working on the project for 4 hrs
+test> db.Employee.updateMany(
+...     { "project.name": "project-2", "project.Hrs": 4 },
+...     { $pull: { project: { name: "project-2" } } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+test> // 9. Change the salary of employees to 10000 only if their salary is < 10000
+test> db.Employee.updateMany(
+...     { sal: { $lt: 10000 } },
+...     { $set: { sal: 10000 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+test> db.Employee.find()
+[
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71395"),
+    emono: 111,
+    ename: 'Deepali Vaidya',
+    sal: 55000,
+    dept: { deptno: 12, dname: 'Hr', dloc: 'Mumbai' },
+    Desg: 'Analyst',
+    mgr: { name: 'Tushar', num: 3333 },
+    project: [
+      { name: 'Project-1', Hrs: 5 },
+      { name: 'project-2', Hrs: 2 },
+      { name: 'project-3', Hrs: 2 },
+      { name: 'project-4', Hrs: 2 }
+    ],
+    bonus: 1500
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71396"),
+    emono: 222,
+    ename: 'Rajan Sharma',
+    sal: 55000,
+    dept: { deptno: 15, dname: 'Sales', dloc: 'Delhi' },
+    Desg: 'Administrative Officer',
+    mgr: { name: 'Deepali Vaidya', num: 111 },
+    project: [ { name: 'Project-1', Hrs: 5 } ],
+    bonus: 1000
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71397"),
+    emono: 333,
+    ename: 'Revati Deshpande',
+    sal: 47000,
+    dept: { deptno: 12, dname: 'Hr', dloc: 'Mumbai' },
+    Desg: 'Administrative Officer',
+    mgr: { name: 'Deepali Vaidya', num: 111 },
+    project: [ { name: 'project-3', Hrs: 2 } ],
+    bonus: 1500
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71398"),
+    emono: 444,
+    ename: 'Pradeep Kumar',
+    sal: 60000,
+    dept: { deptno: 17, dname: 'Purchase', dloc: 'Pune' },
+    Desg: 'Manager',
+    mgr: { name: 'Tushar', num: 3333 },
+    project: [ { name: 'Project-1', Hrs: 4 } ],
+    bonus: 1000
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71399"),
+    emono: 555,
+    ename: 'Tina Mehta',
+    sal: 25000,
+    dept: { deptno: 15, dname: 'Sales', dloc: 'Delhi' },
+    Desg: 'Administrative Officer',
+    mgr: { name: 'Rajan Sharma', num: 222 },
+    project: [ { name: 'project-4', Hrs: 2 } ],
+    bonus: 1000
+  }
+]
+test> // 10. Increase bonus of all employees by 500 based on certain conditions
+
+test> db.Employee.updateMany(
+...     {
+...         $or: [
+...             { bonus: { $lt: 2000 } },
+...             { sal: { $lt: 20000 } },
+...             { "dept.dname": "Sales" }
+...         ]
+...     },
+...     { $inc: { bonus: 500 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+test> // 11. Add 2 new projects at position 2 for certain employees
+
+test> db.Employee.updateMany(
+...     {
+...         $or: [
+...             { Desg: "Analyst" },
+...             { sal: { $in: [30000, 33000, 35000] } }
+...         ]
+...     },
+...     {
+...         $push: {
+...             project: {
+...                 $each: [
+...                     { name: "New Project 1", Hrs: 0 },
+...                     { name: "New Project 2", Hrs: 0 }
+...                 ],
+...                 $position: 2
+...             }
+...         }
+...     }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> // 12. Delete last project of employees with specific conditions
+
+test> db.Employee.updateMany(
+...     { "dept.dname": "Hr", "dept.dloc": "Mumbai" },
+...     { $pop: { project: 1 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+test> 
+
+test> // 13. Change designation to "senior programmer" for employees working on specific project
+
+test> db.Employee.updateMany(
+...     { "project.name": "Project-1", "project.Hrs": 4 },
+...     { $set: { Desg: "Senior Programmer" } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> // 14. Add hobbies for employees whose managers are Rajan or Revati
+
+test> db.Employee.updateMany(
+...     { $or: [ { "mgr.name": "Rajan Sharma" }, { "mgr.name": "Revati Deshpande" } ] },
+...     { $set: { hobbies: ["Reading", "Cooking"] } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> 
+
+test> // 15. Add skillset for employees working on specific projects
+test> db.Employee.updateMany(
+...     {
+...         $or: [
+...             { "project.name": "project-4", "project.Hrs": 3 },
+...             { "project.name": "project-3", "project.Hrs": 4 }
+...         ]
+...     },
+...     { $set: { skillset: ["Java", "C++"] } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+test> // 16. Add a new hobby at a specific position for employees with specific names
+
+test> db.Employee.updateMany(
+...     { $or: [ { ename: /^R|^p/i } ] },
+...     { $push: { hobbies: { $each: ["Blogging"], $position: 2 } } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+test> 
+
+test> // 17. Increase salary and decrease bonus for certain employees
+
+test> db.Employee.updateMany(
+...     {
+...         $or: [
+...             { "project.name": "project-2" },
+...             { "project.name": "project-3" },
+...             { "project.name": "Project-1" }
+...         ]
+...     },
+...     {
+...         $inc: { sal: 10000 },
+...         $inc: { bonus: -1000 }
+...     }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+test> // 18. Remove employees working on project-1
+
+test> db.Employee.updateMany(
+...     { "project.name": "Project-1" },
+...     { $pull: { project: { name: "Project-1" } } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+test> 
+
+test> // 19. Replace a document by the employee name
+
+test> db.Employee.replaceOne(
+...     { ename: "Deepak" },
+...     {
+...         emono: 666,
+...         ename: "New Employee",
+...         sal: 45000.00,
+...         dept: { deptno: 18, dname: "IT", dloc: "Bangalore" },
+...         Desg: "Programmer",
+...         mgr: { name: "Rajan Sharma", num: 222 },
+...         project: [
+...             { name: "project-5", Hrs: 3 }
+...         ]
+...     }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+test> // 20. Change skill from "python" to "python 3.8" for certain employees
+test> db.Employee.updateMany(
+...     { skillset: "python" },
+...     { $set: { "skillset.$": "python 3.8" } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+test> db.Employee.find()
+[
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71395"),
+    emono: 111,
+    ename: 'Deepali Vaidya',
+    sal: 55000,
+    dept: { deptno: 12, dname: 'Hr', dloc: 'Mumbai' },
+    Desg: 'Analyst',
+    mgr: { name: 'Tushar', num: 3333 },
+    project: [
+      { name: 'project-2', Hrs: 2 },
+      { name: 'New Project 1', Hrs: 0 },
+      { name: 'New Project 2', Hrs: 0 },
+      { name: 'project-3', Hrs: 2 }
+    ],
+    bonus: 1000
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71396"),
+    emono: 222,
+    ename: 'Rajan Sharma',
+    sal: 55000,
+    dept: { deptno: 15, dname: 'Sales', dloc: 'Delhi' },
+    Desg: 'Administrative Officer',
+    mgr: { name: 'Deepali Vaidya', num: 111 },
+    project: [],
+    bonus: 500,
+    hobbies: [ 'Blogging' ]
+  },
+  {
+_id: ObjectId("64e7a97c13a1b12a31d71397"),
+    emono: 333,
+    ename: 'Revati Deshpande',
+    sal: 47000,
+    dept: { deptno: 12, dname: 'Hr', dloc: 'Mumbai' },
+    Desg: 'Administrative Officer',
+    mgr: { name: 'Deepali Vaidya', num: 111 },
+    project: [],
+    bonus: 2000,
+    hobbies: [ 'Blogging' ]
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71398"),
+    emono: 444,
+    ename: 'Pradeep Kumar',
+    sal: 60000,
+    dept: { deptno: 17, dname: 'Purchase', dloc: 'Pune' },
+    Desg: 'Senior Programmer',
+    mgr: { name: 'Tushar', num: 3333 },
+    project: [],
+    bonus: 500,
+    hobbies: [ 'Blogging' ]
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71399"),
+    emono: 555,
+    ename: 'Tina Mehta',
+    sal: 25000,
+    dept: { deptno: 15, dname: 'Sales', dloc: 'Delhi' },
+    Desg: 'Administrative Officer',
+    mgr: { name: 'Rajan Sharma', num: 222 },
+    project: [ { name: 'project-4', Hrs: 2 } ],
+    bonus: 1500,
+    hobbies: [ 'Reading', 'Cooking' ]
+  }
+]
+test> // 21. Add skills "MongoDb" and "Perl" to the end of skillset array for employees in Pune
+
+test> db.Employee.updateMany(
+...     { "dept.dloc": "Pune" },
+...     { $push: { skillset: { $each: ["MongoDb", "Perl"] } } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> 
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> 
+test> db.Employee.updateMany(
+...     { skillset: { $in: ["Perl", "python"] } },
+...     {
+...         $push: {
+...             project: {
+...                 $each: [
+...                     { name: "New Project 1", Hrs: 0 },
+...                     { name: "New Project 2", Hrs: 0 }
+...                 ]
+...             }
+...         }
+...     }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> // 25. Change "Hrs" to 6 for project-1 for employees with specific conditions
+
+test> db.Employee.updateMany(
+...     { "project.name": "Project-1", "project.Hrs": { $lt: 6 } },
+...     { $set: { "project.$.Hrs": 6 } }
+... );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+test> db.Employee.find()
+[
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71395"),
+    emono: 111,
+    ename: 'Deepali Vaidya',
+    sal: 55000,
+    dept: { deptno: 12, dname: 'Hr', dloc: 'Mumbai' },
+    Desg: 'Analyst',
+    mgr: { name: 'Tushar', num: 3333 },
+    project: [
+      { name: 'project-2', Hrs: 2 },
+      { name: 'New Project 1', Hrs: 0 },
+      { name: 'New Project 2', Hrs: 0 },
+      { name: 'project-3', Hrs: 2 }
+    ],
+    bonus: 1000
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71396"),
+    emono: 222,
+    ename: 'Rajan Sharma',
+    sal: 55000,
+    dept: { deptno: 15, dname: 'Sales', dloc: 'Delhi' },
+    Desg: 'Administrative Officer',
+    mgr: { name: 'Deepali Vaidya', num: 111 },
+    project: [],
+    bonus: 500,
+    hobbies: [ 'Blogging' ]
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71397"),
+    emono: 333,
+    ename: 'Revati Deshpande',
+    sal: 47000,
+    dept: { deptno: 12, dname: 'Hr', dloc: 'Mumbai' },
+    Desg: 'Administrative Officer',
+    mgr: { name: 'Deepali Vaidya', num: 111 },
+    project: [],
+    bonus: 2000,
+    hobbies: [ 'Blogging' ]
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71398"),
+    emono: 444,
+    ename: 'Pradeep Kumar',
+    sal: 60000,
+    dept: { deptno: 17, dname: 'Purchase', dloc: 'Pune' },
+    Desg: 'Senior Programmer',
+    mgr: { name: 'Tushar', num: 3333 },
+    project: [
+      { name: 'New Project 1', Hrs: 0 },
+      { name: 'New Project 2', Hrs: 0 }
+    ],
+    bonus: 500,
+    hobbies: [ 'Blogging' ],
+    skillset: [ 'MongoDb', 'Perl' ]
+  },
+  {
+    _id: ObjectId("64e7a97c13a1b12a31d71399"),
+    emono: 555,
+    ename: 'Tina Mehta',
+    sal: 25000,
+    dept: { deptno: 15, dname: 'Sales', dloc: 'Delhi' },
+    Desg: 'Administrative Officer',
+    mgr: { name: 'Rajan Sharma', num: 222 },
+    project: [ { name: 'project-4', Hrs: 2 } ],
+    bonus: 1500,
+    hobbies: [ 'Reading', 'Cooking' ]
+  }
+]
+test> 
